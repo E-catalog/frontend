@@ -1,8 +1,4 @@
 {
-  "editor.minimap.enabled": false,
-  "gitlens.codeLens.enabled": false,
-  "workbench.sideBar.location": "right",
-  "workbench.editor.showTabs": false,
   "files.exclude": {
       "**/__pycache__": true,
       ".env": true,
