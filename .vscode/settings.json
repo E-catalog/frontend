@@ -1,0 +1,10 @@
+{
+  "files.exclude": {
+      "**/__pycache__": true,
+      ".env": true,
+      ".venv": true,
+      "env/": true,
+      "venv/": true,
+      "ENV/": true,
+    }
+}
