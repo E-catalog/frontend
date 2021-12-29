@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <!--title>{{ title }}</title-->
+  </head>
+  <body>
+    <h2>Индивиды в хранении</h2>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">Название</th>
+            <th scope="col">Место</th>
+            <th scope="col">Год раскопок</th>
+            <th scope="col">Тип индивида</th>
+            <th scope="col">Сохранность</th>
+            <th scope="col">Пол</th>
+            <th scope="col">Возраст</th>
+            <th scope="col">Датировка</th>
+            <th scope="col">Комментарии</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for individual in individuals %}
+            <tr>
+              <th scope="row">{{ individual.id }}</th>
+              <td>{{ individual.name }}</td>
+              <td>{{ individual.place }}</td>
+              <td>{{ individual.year_of_excavation }}</td>
+              <td>{{ individual.individual_type }}</td>
+              <td>{{ individual.preservation }}</td>
+              <td>{{ individual.sex }}</td>
+              <td>{{ individual.age }}</td>
+              <td>{{ individual.epoch }}</td>
+              <td>{{ individual.comments }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+  </body>
+</html>
