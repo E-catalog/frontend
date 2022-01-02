@@ -1,4 +1,20 @@
-from os import environ
+from dataclasses import dataclass
+from os import getenv
 
 
-API_URL = environ['API_URL']
+@dataclass
+class AppConfig:
+    host: str
+    port: int
+    api_url: str
+
+
+def load() -> AppConfig:
+    return AppConfig(
+        host=getenv('APP_HOST', '0.0.0.0'),
+        port=getenv('APP_PORT', 5001),
+        api_url=getenv('API_URL', 'http://localhost:5000/')
+    )
+
+
+config = load()
