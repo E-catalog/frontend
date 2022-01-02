@@ -1,9 +1,15 @@
 from flask import Flask, render_template
+import requests
+from frontend.config import config
 
 
 app = Flask(__name__)
 
+
 @app.route('/')
-def hello():
-    page_title = "Электронный каталог хранения"
-    return render_template('hello.html', title=page_title)
+def show_individuals():
+    title = "Электронный каталог хранения"
+    response = requests.get(config.api_url)
+    response.raise_for_status()
+    individuals = response.json()
+    return render_template('individuals.html', title=title, individuals=individuals)
