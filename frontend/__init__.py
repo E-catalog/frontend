@@ -1,3 +1,1 @@
-"""
-Frontend package contains all files and packages related to E-catalog frontend
-"""
+"""Frontend package contains all files and packages related to E-catalog frontend."""
