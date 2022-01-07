@@ -1,7 +1,7 @@
-from flask import Flask, render_template
 import requests
-from frontend.config import config
+from flask import Flask, render_template
 
+from frontend.config import config
 
 app = Flask(__name__)
 
