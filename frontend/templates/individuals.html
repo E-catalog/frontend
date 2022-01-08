@@ -12,23 +12,23 @@
   <body>
     <h2>Индивиды в хранении</h2>
     <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th scope="col">id</th>
-            <th scope="col">Название</th>
-            <th scope="col">Место</th>
-            <th scope="col">Год раскопок</th>
-            <th scope="col">Тип индивида</th>
-            <th scope="col">Сохранность</th>
-            <th scope="col">Пол</th>
-            <th scope="col">Возраст</th>
-            <th scope="col">Датировка</th>
-            <th scope="col">Комментарии</th>
-          </tr>
-        </thead>
-        <tbody>
+      <thead>
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">Название</th>
+          <th scope="col">Место</th>
+          <th scope="col">Год раскопок</th>
+          <th scope="col">Тип индивида</th>
+          <th scope="col">Сохранность</th>
+          <th scope="col">Пол</th>
+          <th scope="col">Возраст</th>
+          <th scope="col">Датировка</th>
+          <th scope="col">Комментарии</th>
+        </tr>
+      </thead>
+      <tbody>
           {% for individual in individuals %}
-            <tr>
+          <tr>
               <th scope="row">{{ individual.id }}</th>
               <td>{{ individual.name }}</td>
               <td>{{ individual.place }}</td>
@@ -39,10 +39,55 @@
               <td>{{ individual.age }}</td>
               <td>{{ individual.epoch }}</td>
               <td>{{ individual.comments }}</td>
-            </tr>
+          </tr>
           {% endfor %}
-        </tbody>
-      </table>
+      </tbody>
+    </table>
+
+    <div class="col-5">
+      <h3>Добавить нового индивида</h3>
+        <form action="{{ url_for('add_individual') }}" method="POST">
+
+          <div class="form-group">
+              <label>Место раскопок</label>
+              <input class="form-control" name="place" placeholder="Льговский курган">
+          </div>
+          <div class="form-group">
+              <label>Название</label>
+              <input class="form-control" name="name" placeholder="Погребение 1">
+          </div>
+          <div class='form-group'>
+              <label>Год раскопок</label>
+              <input class="form-control" name="year" placeholder="2017">
+          </div>
+          <div class='form-group'>
+              <label>Тип индивида</label>
+              <input class="form-control" name="type" placeholder="Ингумация">
+          </div>
+          <div class='form-group'>
+              <label>Пол</label>
+              <input class="form-control" name="sex" placeholder="Женщина">
+          </div>
+          <div class='form-group'>
+              <label>Возраст</label>
+              <input class="form-control" name="age" placeholder="25-35">
+          </div>
+          <div class='form-group'>
+              <label>Сохранность</label>
+              <input class="form-control" name="preservation" placeholder="Хорошая">
+          </div>
+          <div class='form-group'>
+              <label>Датировка</label>
+              <input class="form-control" name="epoch" placeholder="Бронзовый век">
+          </div>
+          <div class='form-group'>
+              <label>Комментарии</label>
+              <input class="form-control" name="comments" placeholder="Массивный скелет, охра на черепе">
+          </div>
+          <button type="submit" class="btn btn-primary">Создать</button>
+        </form>
+      </div>
+
       <!-- Дополнительный JavaScript; выберите один из двух! -->
 
       <!-- Вариант 1: Bootstrap в связке с Popper -->

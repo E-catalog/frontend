@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "fronend",
+            "name": "frontend",
             "type": "python",
             "request": "launch",
             "module": "frontend",
