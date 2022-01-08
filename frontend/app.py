@@ -9,7 +9,8 @@ app = Flask(__name__)
 @app.route('/')
 def show_individuals():
     title = 'Электронный каталог хранения'
-    response = requests.get(config.api_url)
+    url = f'{config.api_url}/api/v1/individuals/'
+    response = requests.get(url)
     response.raise_for_status()
     individuals = response.json()
     return render_template('individuals.html', title=title, individuals=individuals)
