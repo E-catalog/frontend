@@ -9,6 +9,7 @@ python = "^3.9"
 Flask = "^2.0.2"
 SQLAlchemy = "^1.4.29"
 requests = "^2.26.0"
+httpx = "^0.21.3"
 
 [tool.poetry.dev-dependencies]
 wemake-python-styleguide = "^0.16.0"
