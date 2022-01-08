@@ -17,5 +17,4 @@ def show_individuals():
 
 @app.route('/', methods=['POST'])
 def add_individual():
-    print(request.data)
-    return show_individuals(), 200
+    return request.form
