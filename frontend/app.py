@@ -13,7 +13,11 @@ client = Client(config.api_url)
 def show_individuals():
     title = 'Электронный каталог хранения'
     individuals = client.individuals.get_all()
-    return render_template('individuals.html', title=title, individuals=individuals)
+    return render_template(
+        'individuals.html',
+        title=title,
+        individuals=[item.dict() for item in individuals],
+    )
 
 
 @app.route('/', methods=['POST'])
