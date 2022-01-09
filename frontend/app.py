@@ -2,17 +2,17 @@ import requests
 from flask import Flask, render_template, request
 
 from frontend.config import config
+from frontend.api.client import Client
 
 app = Flask(__name__)
+
+client = Client(config.api_url)
 
 
 @app.route('/')
 def show_individuals():
     title = 'Электронный каталог хранения'
-    url = f'{config.api_url}/api/v1/individuals/'
-    response = requests.get(url)
-    response.raise_for_status()
-    individuals = response.json()
+    individuals = client.individuals.get_all()
     return render_template('individuals.html', title=title, individuals=individuals)
 
 
