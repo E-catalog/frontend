@@ -1,11 +1,14 @@
-from typing import Optional
+import logging
+from typing import Any, Optional
 
 import httpx
 from pydantic import BaseModel
 
+logger = logging.getLogger(__name__)
+
 
 class Individual(BaseModel):
-    id: int
+    id: Optional[int]
     place: str
     name: str
     year_of_excavation: Optional[int]
@@ -27,3 +30,8 @@ class IndividualsClient:
         response.raise_for_status()
         data = response.json()
         return [Individual(**item) for item in data]
+
+    def add(self, form_data: dict[str, Any]) -> str:
+        response = httpx.post(f'{self.url}/', json=form_data)
+        response.raise_for_status()
+        return 'Индивид успешно создан'
