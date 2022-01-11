@@ -1,10 +1,7 @@
-import logging
 from typing import Any, Optional
 
 import httpx
 from pydantic import BaseModel
-
-logger = logging.getLogger(__name__)
 
 
 class Individual(BaseModel):
