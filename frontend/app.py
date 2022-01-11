@@ -1,7 +1,7 @@
 import logging
 from http import HTTPStatus
 
-from flask import abort, Flask, redirect, render_template, request, url_for
+from flask import Flask, abort, redirect, render_template, request, url_for
 from pydantic import ValidationError
 
 from frontend.api.client import Client
@@ -27,11 +27,11 @@ def show_individuals():
 
 @app.route('/', methods=['POST'])
 def add_individual():
-    form_data = request.json
+    form_data = dict(**request.form)
     if not form_data:
         abort(HTTPStatus.BAD_REQUEST, 'Тело запроса не может быть пустым')
 
-    form_data['uid'] = -1
+    form_data['id'] = '-1'
 
     try:
         payload = Individual(**form_data)

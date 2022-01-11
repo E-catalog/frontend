@@ -15,6 +15,17 @@ class IndividualsClient:
         return [Individual(**item) for item in data]
 
     def add(self, payload: Individual) -> int:
-        response = httpx.post(f'{self.url}/', json=payload)
+        new_individual = {
+            'name': payload.name,
+            'place': payload.place,
+            'sex': payload.sex,
+            'age': payload.age,
+            'year_of_excavation': payload.year_of_excavation,
+            'individual_type': payload.individual_type,
+            'preservation': payload.preservation,
+            'epoch': payload.epoch,
+            'comments': payload.comments,
+        }
+        response = httpx.post(f'{self.url}/', json=new_individual)
         response.raise_for_status()
-        return 201
+        return response.status_code
