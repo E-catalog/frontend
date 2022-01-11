@@ -1,4 +1,5 @@
 from http import HTTPStatus
+from typing import Any
 
 from flask import Flask, abort, redirect, render_template, request, url_for
 from pydantic import ValidationError
@@ -25,11 +26,11 @@ def show_individuals():
 
 @app.route('/', methods=['POST'])
 def add_individual():
-    form_data = request.form.to_dict()
+    form_data: dict[str, Any] = request.form.to_dict()
     if not form_data:
         abort(HTTPStatus.BAD_REQUEST, 'Отсутствуют данные')
 
-    form_data['id'] = '-1'
+    form_data['id'] = -1
 
     try:
         payload = Individual(**form_data)
