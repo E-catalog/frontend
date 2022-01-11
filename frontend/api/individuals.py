@@ -1,20 +1,8 @@
-from typing import Any, Optional
+from http import HTTPStatus
 
 import httpx
-from pydantic import BaseModel
 
-
-class Individual(BaseModel):
-    id: Optional[int]
-    place: str
-    name: str
-    year_of_excavation: Optional[int]
-    sex: Optional[str]
-    age: Optional[str]
-    individual_type: Optional[str]
-    preservation: Optional[str]
-    epoch: Optional[str]
-    comments: Optional[str]
+from frontend.api.models import Individual
 
 
 class IndividualsClient:
@@ -28,7 +16,8 @@ class IndividualsClient:
         data = response.json()
         return [Individual(**item) for item in data]
 
-    def add(self, form_data: dict[str, Any]) -> str:
-        response = httpx.post(f'{self.url}/', json=form_data)
+    def add(self, payload: Individual) -> int:
+        new_individual = payload.dict()
+        response = httpx.post(f'{self.url}/', json=new_individual)
         response.raise_for_status()
-        return 'Индивид успешно создан'
+        return HTTPStatus.CREATED

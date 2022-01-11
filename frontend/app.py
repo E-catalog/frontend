@@ -1,6 +1,11 @@
-from flask import Flask, redirect, render_template, request, url_for
+from http import HTTPStatus
+from typing import Any
+
+from flask import Flask, abort, redirect, render_template, request, url_for
+from pydantic import ValidationError
 
 from frontend.api.client import Client
+from frontend.api.models import Individual
 from frontend.config import config
 
 app = Flask(__name__)
@@ -21,6 +26,16 @@ def show_individuals():
 
 @app.route('/', methods=['POST'])
 def add_individual():
-    form_data = dict(request.form)
-    client.individuals.add(form_data)
+    form_data: dict[str, Any] = request.form.to_dict()
+    if not form_data:
+        abort(HTTPStatus.BAD_REQUEST, 'Отсутствуют данные')
+
+    form_data['id'] = -1
+
+    try:
+        payload = Individual(**form_data)
+    except ValidationError:
+        abort(HTTPStatus.BAD_REQUEST, 'Неверный тип данных в запросе')
+
+    client.individuals.add(payload)
     return redirect(url_for('show_individuals'))
