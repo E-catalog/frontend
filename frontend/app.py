@@ -1,4 +1,3 @@
-import logging
 from http import HTTPStatus
 
 from flask import Flask, abort, redirect, render_template, request, url_for
@@ -11,7 +10,6 @@ from frontend.config import config
 app = Flask(__name__)
 
 client = Client(config.api_url)
-logger = logging.getLogger(__name__)
 
 
 @app.route('/')
@@ -27,16 +25,15 @@ def show_individuals():
 
 @app.route('/', methods=['POST'])
 def add_individual():
-    form_data = dict(**request.form)
+    form_data = request.form.to_dict()
     if not form_data:
-        abort(HTTPStatus.BAD_REQUEST, 'Тело запроса не может быть пустым')
+        abort(HTTPStatus.BAD_REQUEST, 'Отсутствуют данные')
 
     form_data['id'] = '-1'
 
     try:
         payload = Individual(**form_data)
-    except ValidationError as error:
-        logger.info('Ошибка в процессе pydantic-валидации: %s', error)
+    except ValidationError:
         abort(HTTPStatus.BAD_REQUEST, 'Неверный тип данных в запросе')
 
     client.individuals.add(payload)

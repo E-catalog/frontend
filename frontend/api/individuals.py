@@ -1,3 +1,5 @@
+from http import HTTPStatus
+
 import httpx
 
 from frontend.api.models import Individual
@@ -15,17 +17,7 @@ class IndividualsClient:
         return [Individual(**item) for item in data]
 
     def add(self, payload: Individual) -> int:
-        new_individual = {
-            'name': payload.name,
-            'place': payload.place,
-            'sex': payload.sex,
-            'age': payload.age,
-            'year_of_excavation': payload.year_of_excavation,
-            'individual_type': payload.individual_type,
-            'preservation': payload.preservation,
-            'epoch': payload.epoch,
-            'comments': payload.comments,
-        }
+        new_individual = payload.dict()
         response = httpx.post(f'{self.url}/', json=new_individual)
         response.raise_for_status()
-        return response.status_code
+        return HTTPStatus.CREATED
