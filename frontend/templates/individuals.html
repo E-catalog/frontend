@@ -46,6 +46,9 @@
 
     <div class="col-5">
       <h3>Добавить нового индивида</h3>
+      <div class="alert alert-success" role="alert">
+        {{ response }}
+      </div>
         <form action="{{ url_for('add_individual') }}" method="POST">
 
           <div class="form-group">
