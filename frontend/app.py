@@ -1,8 +1,7 @@
-import requests
-from flask import Flask, render_template, request
+from flask import Flask, redirect, render_template, request, url_for
 
-from frontend.config import config
 from frontend.api.client import Client
+from frontend.config import config
 
 app = Flask(__name__)
 
@@ -22,4 +21,6 @@ def show_individuals():
 
 @app.route('/', methods=['POST'])
 def add_individual():
-    return request.form
+    form_data = dict(request.form)
+    client.individuals.add(form_data)
+    return redirect(url_for('show_individuals'))
