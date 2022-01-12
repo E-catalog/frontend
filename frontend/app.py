@@ -53,7 +53,7 @@ def add_individual():
     return redirect(url_for('show_individuals'))
 
 
-@app.route('/individuals', methods=['POST', 'PUT'])
+@app.route('/individuals', methods=['POST'])
 def update_individual():
     form_data: dict[str, Any] = request.form.to_dict()
     if not form_data:
