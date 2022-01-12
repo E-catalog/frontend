@@ -14,14 +14,26 @@ client = Client(config.api_url)
 
 
 @app.route('/')
-def show_individuals():
+def show_individuals(individual=None):
     title = 'Электронный каталог хранения'
     individuals = client.individuals.get_all()
     return render_template(
         'individuals.html',
         title=title,
         individuals=[item.dict() for item in individuals],
+        individual=individual,
     )
+
+
+@app.route('/individual')
+def get_individual():
+    form_data: dict[str, Any] = request.args
+    if not form_data:
+        abort(HTTPStatus.BAD_REQUEST, 'Отсутствуют данные')
+
+    id_from_form = form_data['id']
+    individual = client.individuals.get(id_from_form)
+    return show_individuals(individual.dict())
 
 
 @app.route('/', methods=['POST'])
@@ -39,3 +51,8 @@ def add_individual():
 
     client.individuals.add(payload)
     return redirect(url_for('show_individuals'))
+
+
+@app.route('/', methods=['PUT'])
+def update_individual():
+    pass

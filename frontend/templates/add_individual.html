@@ -1,0 +1,56 @@
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Добавить нового индивида</h5>
+        </div>
+        <div class="modal-body">
+            <form action="{{ url_for('add_individual') }}" method="POST">
+                <div class="form-group">
+                    <label>Место раскопок</label>
+                    <input class="form-control" name="place" placeholder="Льговский курган">
+                </div>
+                <div class="form-group">
+                    <label>Название</label>
+                    <input class="form-control" name="name" placeholder="Погребение 1">
+                </div>
+                <div class='form-group'>
+                    <label>Год раскопок</label>
+                    <input class="form-control" name="year_of_excavation" placeholder="2017">
+                </div>
+                <div class='form-group'>
+                    <label>Тип индивида</label>
+                    <input class="form-control" name="individual_type" placeholder="Ингумация">
+                </div>
+                <div class='form-group'>
+                    <label>Пол</label>
+                    <input class="form-control" name="sex" placeholder="Женщина">
+                </div>
+                <div class='form-group'>
+                    <label>Возраст</label>
+                    <input class="form-control" name="age" placeholder="25-35">
+                </div>
+                <div class='form-group'>
+                    <label>Сохранность</label>
+                    <input class="form-control" name="preservation" placeholder="Хорошая">
+                </div>
+                <div class='form-group'>
+                    <label>Датировка</label>
+                    <input class="form-control" name="epoch" placeholder="Бронзовый век">
+                </div>
+                <div class='form-group'>
+                    <label>Комментарии</label>
+                    <input class="form-control" name="comments" placeholder="Массивный скелет, охра на черепе">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Создать</button>
+                  <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button> -->
+                </div>
+            </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
