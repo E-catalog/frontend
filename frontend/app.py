@@ -53,6 +53,16 @@ def add_individual():
     return redirect(url_for('show_individuals'))
 
 
-@app.route('/', methods=['PUT'])
+@app.route('/individuals', methods=['POST', 'PUT'])
 def update_individual():
-    pass
+    form_data: dict[str, Any] = request.form.to_dict()
+    if not form_data:
+        abort(HTTPStatus.BAD_REQUEST, 'Отсутствуют данные')
+
+    try:
+        payload = Individual(**form_data)
+    except ValidationError:
+        abort(HTTPStatus.BAD_REQUEST, 'Неверный тип данных в запросе')
+
+    client.individuals.update(uid=form_data['id'], payload=payload)
+    return redirect(url_for('show_individuals'))

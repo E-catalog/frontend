@@ -27,3 +27,9 @@ class IndividualsClient:
         response = httpx.post(f'{self.url}/', json=new_individual)
         response.raise_for_status()
         return HTTPStatus.CREATED
+
+    def update(self, uid: int, payload: Individual) -> int:
+        updated_individual = payload.dict()
+        response = httpx.put(f'{self.url}/{uid}', json=updated_individual)
+        response.raise_for_status()
+        return HTTPStatus.OK
