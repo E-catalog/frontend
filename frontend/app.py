@@ -8,7 +8,7 @@ from frontend.api.client import Client
 from frontend.api.models import Individual
 from frontend.config import config
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 
 client = Client(config.api_url)
 
@@ -24,15 +24,15 @@ def show_individuals():
     )
 
 
-@app.route('/individuals/get/')
+@app.route('/individuals/get/', methods=['POST'])
 def get_individual():
-    form_data: dict[str, Any] = request.args
+    form_data: dict[str, Any] = request.form.to_dict()
     if not form_data:
         abort(HTTPStatus.BAD_REQUEST, 'Отсутствуют данные')
 
     id_from_form = form_data['id']
     individual = client.individuals.get(id_from_form)
-    return render_template('update_individual.html', individual=individual.dict())
+    return render_template('update_individual_form.html', individual=individual.dict())
 
 
 @app.route('/individuals/create/', methods=['POST'])
