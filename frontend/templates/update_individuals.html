@@ -1,0 +1,44 @@
+<h5>Добавить нового индивида</h5>
+<form action="{{ url_for('update_individual') }}" method="POST">
+    <div class="form-group">
+        <label>ID</label>
+        <input class="form-control" name="id" value="{{ individual.uid }}" readonly>
+    </div>
+    <div class="form-group">
+        <label>Место раскопок</label>
+        <input class="form-control" name="place" value="{{ individual.place }}">
+    </div>
+    <div class="form-group">
+        <label>Название</label>
+        <input class="form-control" name="name" value="{{ individual.name }}">
+    </div>
+    <div class='form-group'>
+        <label>Год раскопок</label>
+        <input class="form-control" name="year_of_excavation" value="{{ individual.year_of_excavation }}">
+    </div>
+    <div class='form-group'>
+        <label>Тип индивида</label>
+        <input class="form-control" name="individual_type" value="{{ individual.individual_type }}">
+    </div>
+    <div class='form-group'>
+        <label>Пол</label>
+        <input class="form-control" name="sex" value="{{ individual.sex }}">
+    </div>
+    <div class='form-group'>
+        <label>Возраст</label>
+        <input class="form-control" name="age" value="{{ individual.age }}">
+    </div>
+    <div class='form-group'>
+        <label>Сохранность</label>
+        <input class="form-control" name="preservation" value="{{ individual.preservation }}">
+    </div>
+    <div class='form-group'>
+        <label>Датировка</label>
+        <input class="form-control" name="epoch" value="{{ individual.epoch }}">
+    </div>
+    <div class='form-group'>
+        <label>Комментарии</label>
+        <input class="form-control" name="comments" value="{{ individual.comments }}">
+    </div>
+    <button type="submit" class="btn btn-primary">Обновить</button>
+</form>

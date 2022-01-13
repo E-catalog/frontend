@@ -16,8 +16,20 @@ class IndividualsClient:
         data = response.json()
         return [Individual(**item) for item in data]
 
+    def get(self, uid: int) -> Individual:
+        response = httpx.get(f'{self.url}/{uid}')
+        response.raise_for_status()
+        data = response.json()
+        return Individual(**data)
+
     def add(self, payload: Individual) -> int:
         new_individual = payload.dict()
         response = httpx.post(f'{self.url}/', json=new_individual)
         response.raise_for_status()
         return HTTPStatus.CREATED
+
+    def update(self, uid: int, payload: Individual) -> int:
+        updated_individual = payload.dict()
+        response = httpx.put(f'{self.url}/{uid}', json=updated_individual)
+        response.raise_for_status()
+        return HTTPStatus.OK
