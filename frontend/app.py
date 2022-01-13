@@ -13,7 +13,7 @@ app = Flask(__name__)
 client = Client(config.api_url)
 
 
-@app.route('/')
+@app.route('/individuals')
 def show_individuals(individual=None):
     title = 'Электронный каталог хранения'
     individuals = client.individuals.get_all()
@@ -25,7 +25,7 @@ def show_individuals(individual=None):
     )
 
 
-@app.route('/individual')
+@app.route('/individuals/get/')
 def get_individual():
     form_data: dict[str, Any] = request.args
     if not form_data:
@@ -36,7 +36,7 @@ def get_individual():
     return show_individuals(individual.dict())
 
 
-@app.route('/', methods=['POST'])
+@app.route('/individuals/create/', methods=['POST'])
 def add_individual():
     form_data: dict[str, Any] = request.form.to_dict()
     if not form_data:
@@ -53,7 +53,7 @@ def add_individual():
     return redirect(url_for('show_individuals'))
 
 
-@app.route('/individuals', methods=['POST'])
+@app.route('/individuals/update/', methods=['POST'])
 def update_individual():
     form_data: dict[str, Any] = request.form.to_dict()
     if not form_data:
