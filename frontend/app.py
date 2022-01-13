@@ -32,7 +32,7 @@ def get_individual():
 
     id_from_form = form_data['id']
     individual = client.individuals.get(id_from_form)
-    return render_template('update_form.html', individual=individual.dict())
+    return render_template('update_individual.html', individual=individual.dict())
 
 
 @app.route('/individuals/create/', methods=['POST'])
