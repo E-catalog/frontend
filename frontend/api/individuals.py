@@ -33,3 +33,8 @@ class IndividualsClient:
         response = httpx.put(f'{self.url}/{uid}', json=updated_individual)
         response.raise_for_status()
         return HTTPStatus.OK
+
+    def delete(self, uid: int) -> int:
+        response = httpx.delete(f'{self.url}/{uid}')
+        response.raise_for_status()
+        return HTTPStatus.NO_CONTENT
