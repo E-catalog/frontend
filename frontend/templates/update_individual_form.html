@@ -1,4 +1,3 @@
-<h5>Добавить нового индивида</h5>
 <form action="{{ url_for('update_individual') }}" method="POST">
     <div class="form-group">
         <label>ID</label>
@@ -40,5 +39,8 @@
         <label>Комментарии</label>
         <input class="form-control" name="comments" value="{{ individual.comments }}">
     </div>
-    <button type="submit" class="btn btn-primary">Обновить</button>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+        <button type="submit" class="btn btn-primary">Обновить</button>
+    </div>
 </form>
