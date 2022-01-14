@@ -66,3 +66,14 @@ def update_individual():
 
     client.individuals.update(uid=form_data['id'], payload=payload)
     return redirect(url_for('show_individuals'))
+
+
+@app.route('/individuals/delete/', methods=['POST'])
+def delete_individual():
+    form_data: dict[str, Any] = request.form.to_dict()
+    if not form_data:
+        abort(HTTPStatus.BAD_REQUEST, 'Отсутствуют данные')
+
+    id_from_form = form_data['id']
+    client.individuals.delete(id_from_form)
+    return show_individuals()
