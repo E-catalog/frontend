@@ -1,7 +1,11 @@
 <form action="{{ url_for('update_individual') }}" method="POST">
     <div class="form-group">
         <label>ID</label>
-        <input class="form-control" name="id" value="{{ individual.uid }}" readonly>
+        <input class="form-control" name="uid" value="{{ individual.uid }}" readonly>
+    </div>
+    <div class="form-group">
+        <label>ID места</label>
+        <input class="form-control" name="place_uid" value="{{ individual.place_uid }}" readonly>
     </div>
     <div class="form-group">
         <label>Место раскопок</label>

@@ -41,7 +41,7 @@ def add_individual():
     if not form_data:
         abort(HTTPStatus.BAD_REQUEST, 'Отсутствуют данные')
 
-    form_data['id'] = -1
+    form_data['uid'] = -1
 
     try:
         payload = Individual(**form_data)
@@ -63,7 +63,7 @@ def update_individual():
     except ValidationError:
         abort(HTTPStatus.BAD_REQUEST, 'Неверный тип данных в запросе')
 
-    client.individuals.update(uid=form_data['id'], payload=payload)
+    client.individuals.update(uid=form_data['uid'], payload=payload)
     return redirect(url_for('show_individuals'))
 
 
