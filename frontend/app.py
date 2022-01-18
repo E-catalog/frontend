@@ -30,7 +30,7 @@ def get_individual():
     if not form_data:
         abort(HTTPStatus.BAD_REQUEST, 'Отсутствуют данные')
 
-    id_from_form = form_data['id']
+    id_from_form = form_data['uid']
     individual = client.individuals.get(id_from_form)
     return render_template('update_individual_form.html', individual=individual.dict())
 
@@ -73,6 +73,6 @@ def delete_individual():
     if not form_data:
         abort(HTTPStatus.BAD_REQUEST, 'Отсутствуют данные')
 
-    id_from_form = form_data['id']
+    id_from_form = form_data['uid']
     client.individuals.delete(id_from_form)
     return show_individuals()
