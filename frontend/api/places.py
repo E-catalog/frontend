@@ -2,7 +2,7 @@ from http import HTTPStatus
 
 import httpx
 
-from frontend.api.models import Place
+from frontend.api.schemas import Place
 
 
 class PlacesClient:

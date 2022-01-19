@@ -2,7 +2,7 @@ from http import HTTPStatus
 
 import httpx
 
-from frontend.api.models import Individual
+from frontend.api.schemas import Individual
 
 
 class IndividualsClient:

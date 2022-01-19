@@ -5,7 +5,7 @@ from flask import Flask, abort, redirect, render_template, request, url_for
 from pydantic import ValidationError
 
 from frontend.api.client import Client
-from frontend.api.models import Individual
+from frontend.api.schemas import Individual
 from frontend.config import config
 
 app = Flask(__name__, static_url_path='/static')
