@@ -30,8 +30,8 @@ def get_individual():
     if not form_data:
         abort(HTTPStatus.BAD_REQUEST, 'Отсутствуют данные')
 
-    id_from_form = form_data['uid']
-    individual = client.individuals.get(id_from_form)
+    uid = form_data['uid']
+    individual = client.individuals.get(uid)
     return render_template('individuals/update_individual_form.html', individual=individual.dict())
 
 
