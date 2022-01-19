@@ -18,7 +18,7 @@ def show_individuals():
     title = 'Электронный каталог хранения'
     individuals = client.individuals.get_all()
     return render_template(
-        'individuals.html',
+        'main_page.html',
         title=title,
         individuals=[item.dict() for item in individuals],
     )
@@ -32,7 +32,7 @@ def get_individual():
 
     id_from_form = form_data['uid']
     individual = client.individuals.get(id_from_form)
-    return render_template('update_individual_form.html', individual=individual.dict())
+    return render_template('individuals/update_individual_form.html', individual=individual.dict())
 
 
 @app.route('/individuals/create/', methods=['POST'])
