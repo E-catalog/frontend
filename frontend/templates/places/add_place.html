@@ -1,0 +1,37 @@
+<div class="modal fade" id="AddPlaceModal" tabindex="-1" role="dialog" aria-labelledby="AddPlaceModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Добавить новое место</h5>
+        </div>
+        <div class="modal-body">
+            <form action="{{ url_for('add_place') }}" method="POST">
+                <div class="form-group">
+                    <label>Название</label>
+                    <input class="form-control" name="name" placeholder="Кремлевский курган">
+                </div>
+                <div class='form-group'>
+                    <label>Автор раскопок</label>
+                    <input class="form-control" name="head_of_excavations" placeholder="Иванов И.И.">
+                </div>
+                <div class='form-group'>
+                    <label>Тип могильника</label>
+                    <input class="form-control" name="type_of_burial_site" placeholder="Курган">
+                </div>
+                <div class='form-group'>
+                    <label>Координаты</label>
+                    <input class="form-control" name="coordinates" placeholder="55.822530, 37.746985">
+                </div>
+                <div class='form-group'>
+                    <label>Комментарии</label>
+                    <input class="form-control" name="comments" placeholder="Частично разграблен">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                    <button type="submit" class="btn btn-primary">Создать</button>
+                </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>

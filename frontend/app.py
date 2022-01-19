@@ -5,7 +5,7 @@ from flask import Flask, abort, redirect, render_template, request, url_for
 from pydantic import ValidationError
 
 from frontend.api.client import Client
-from frontend.api.schemas import Individual
+from frontend.api.schemas import Individual, Place
 from frontend.config import config
 
 app = Flask(__name__, static_url_path='/static')
@@ -14,13 +14,15 @@ client = Client(config.api_url)
 
 
 @app.route('/')
-def show_individuals():
+def render_main_page():
     title = 'Электронный каталог хранения'
     individuals = client.individuals.get_all()
+    places = client.places.get_all()
     return render_template(
-        'individuals.html',
+        'main_page.html',
         title=title,
         individuals=[item.dict() for item in individuals],
+        places=[item.dict() for item in places],
     )
 
 
@@ -30,9 +32,9 @@ def get_individual():
     if not form_data:
         abort(HTTPStatus.BAD_REQUEST, 'Отсутствуют данные')
 
-    id_from_form = form_data['uid']
-    individual = client.individuals.get(id_from_form)
-    return render_template('update_individual_form.html', individual=individual.dict())
+    uid = form_data['uid']
+    individual = client.individuals.get(uid)
+    return render_template('individuals/update_individual_form.html', individual=individual.dict())
 
 
 @app.route('/individuals/create/', methods=['POST'])
@@ -49,7 +51,7 @@ def add_individual():
         abort(HTTPStatus.BAD_REQUEST, 'Неверный тип данных в запросе')
 
     client.individuals.add(payload)
-    return redirect(url_for('show_individuals'))
+    return redirect(url_for('render_main_page'))
 
 
 @app.route('/individuals/update/', methods=['POST'])
@@ -64,7 +66,7 @@ def update_individual():
         abort(HTTPStatus.BAD_REQUEST, 'Неверный тип данных в запросе')
 
     client.individuals.update(uid=form_data['uid'], payload=payload)
-    return redirect(url_for('show_individuals'))
+    return redirect(url_for('render_main_page'))
 
 
 @app.route('/individuals/delete/', methods=['POST'])
@@ -75,4 +77,21 @@ def delete_individual():
 
     id_from_form = form_data['uid']
     client.individuals.delete(id_from_form)
-    return show_individuals()
+    return render_main_page()
+
+
+@app.route('/places/add/', methods=['POST'])
+def add_place():
+    form_data: dict[str, Any] = request.form.to_dict()
+    if not form_data:
+        abort(HTTPStatus.BAD_REQUEST, 'Отсутствуют данные')
+
+    form_data['uid'] = -1
+
+    try:
+        payload = Place(**form_data)
+    except ValidationError:
+        abort(HTTPStatus.BAD_REQUEST, 'Неверный тип данных в запросе')
+
+    client.places.add(payload)
+    return redirect(url_for('render_main_page'))
