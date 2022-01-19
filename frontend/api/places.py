@@ -2,35 +2,35 @@ from http import HTTPStatus
 
 import httpx
 
-from frontend.api.schemas import Individual
+from frontend.api.schemas import Place
 
 
-class IndividualsClient:
+class PlacesClient:
 
     def __init__(self, url: str) -> None:
-        self.url = f'{url}/individuals'
+        self.url = f'{url}/places'
 
-    def get_all(self) -> list[Individual]:
+    def get_all(self) -> list[Place]:
         response = httpx.get(f'{self.url}/')
         response.raise_for_status()
         data = response.json()
-        return [Individual(**item) for item in data]
+        return [Place(**item) for item in data]
 
-    def get(self, uid: int) -> Individual:
+    def get(self, uid: int) -> Place:
         response = httpx.get(f'{self.url}/{uid}')
         response.raise_for_status()
         data = response.json()
-        return Individual(**data)
+        return Place(**data)
 
-    def add(self, payload: Individual) -> int:
+    def add(self, payload: Place) -> int:
         new_individual = payload.dict()
         response = httpx.post(f'{self.url}/', json=new_individual)
         response.raise_for_status()
         return HTTPStatus.CREATED
 
-    def update(self, uid: int, payload: Individual) -> int:
-        updated_individual = payload.dict()
-        response = httpx.put(f'{self.url}/{uid}', json=updated_individual)
+    def update(self, uid: int, payload: Place) -> int:
+        updated_place = payload.dict()
+        response = httpx.put(f'{self.url}/{uid}', json=updated_place)
         response.raise_for_status()
         return HTTPStatus.OK
 

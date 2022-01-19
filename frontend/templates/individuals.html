@@ -16,7 +16,7 @@
         <tr>
           <th scope="col">ID</th>
           <th scope="col">Название</th>
-          <th scope="col">Место</th>
+          <th scope="col">Место раскопок</th>
           <th scope="col">Год раскопок</th>
           <th scope="col">Тип индивида</th>
           <th scope="col">Сохранность</th>
@@ -31,7 +31,7 @@
           <tr>
               <th scope="row">{{ individual.uid }}</th>
               <td>{{ individual.name }}</td>
-              <td>{{ individual.place }}</td>
+              <td>{{ individual.links['place']['name'] }}</td>
               <td>{{ individual.year_of_excavation }}</td>
               <td>{{ individual.individual_type }}</td>
               <td>{{ individual.preservation }}</td>

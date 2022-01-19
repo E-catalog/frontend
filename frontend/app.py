@@ -5,7 +5,7 @@ from flask import Flask, abort, redirect, render_template, request, url_for
 from pydantic import ValidationError
 
 from frontend.api.client import Client
-from frontend.api.models import Individual
+from frontend.api.schemas import Individual
 from frontend.config import config
 
 app = Flask(__name__, static_url_path='/static')
@@ -30,7 +30,7 @@ def get_individual():
     if not form_data:
         abort(HTTPStatus.BAD_REQUEST, 'Отсутствуют данные')
 
-    id_from_form = form_data['id']
+    id_from_form = form_data['uid']
     individual = client.individuals.get(id_from_form)
     return render_template('update_individual_form.html', individual=individual.dict())
 
@@ -73,6 +73,6 @@ def delete_individual():
     if not form_data:
         abort(HTTPStatus.BAD_REQUEST, 'Отсутствуют данные')
 
-    id_from_form = form_data['id']
+    id_from_form = form_data['uid']
     client.individuals.delete(id_from_form)
     return show_individuals()
