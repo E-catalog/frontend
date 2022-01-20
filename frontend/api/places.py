@@ -5,7 +5,7 @@ import httpx
 from frontend.api.models import Place
 
 
-class PlacesCliens:
+class PlacesClients:
 
     def __init__(self, url: str) -> None:
         self.url = f'{url}/places'

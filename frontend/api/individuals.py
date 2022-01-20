@@ -38,3 +38,4 @@ class IndividualsClient:
         response = httpx.delete(f'{self.url}/{uid}')
         response.raise_for_status()
         return HTTPStatus.NO_CONTENT
+        

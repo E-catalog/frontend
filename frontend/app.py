@@ -5,7 +5,7 @@ from flask import Flask, abort, redirect, render_template, request, url_for
 from pydantic import ValidationError
 
 from frontend.api.client import Client
-from frontend.api.models import Individual
+from frontend.api.models import Individual, Place
 from frontend.config import config
 
 app = Flask(__name__, static_url_path='/static')
@@ -75,4 +75,70 @@ def delete_individual():
 
     id_from_form = form_data['id']
     client.individuals.delete(id_from_form)
+    return show_individuals()
+
+
+def show_places():
+    title = 'Электронный каталог хранения'
+    places = client.places.get_all()
+    return render_template(
+        'places.html',
+        title=title,
+        places=[item.dict() for item in places],
+    )
+
+
+@app.route('/places/get/', methods=['POST'])
+def get_place():
+    form_data: dict[str, Any] = request.form.to_dict()
+    if not form_data:
+        abort(HTTPStatus.BAD_REQUEST, 'Отсутствуют данные')
+
+    id_from_form = form_data['id']
+    individual = client.individuals.get(id_from_form)
+    return render_template('update_individual_form.html', individual=individual.dict())
+
+
+
+@app.route('/places/update/', methods=['POST'])
+def update_place():
+    form_data: dict[str, Any] = request.form.to_dict()
+
+    if not form_data:
+        abort(HTTPStatus.BAD_REQUEST, 'Отсутствуют данные')
+
+    try:
+        payload = Place(**form_data)
+    except ValidationError:
+        abort(HTTPStatus.BAD_REQUEST, 'Неверный тип данных в запросе')
+
+    client.places.update(uid=form_data['uid'], payload=payload)
+    return redirect(url_for('show_places'))
+
+
+    @app.route('/places/create/', methods=['POST'])
+    def add_place():
+        form_data: dict[str, Any] = request.form.to_dict()
+        if not form_data:
+            abort(HTTPStatus.BAD_REQUEST, 'Отсутствуют данные')
+
+    form_data['uid'] = -1
+
+    try:
+        payload = Place(**form_data)
+    except ValidationError:
+        abort(HTTPStatus.BAD_REQUEST, 'Неверный тип данных в запросе')
+
+    client.places.add(payload)
+    return redirect(url_for('show_places'))
+
+
+@app.route('/places/delete/', methods=['POST'])
+def delete_place():
+    form_data: dict[str, Any] = request.form.to_dict()
+    if not form_data:
+        abort(HTTPStatus.BAD_REQUEST, 'Отсутствуют данные')
+
+    id_from_form = form_data['id']
+    client.places.delete(id_from_form)
     return show_individuals()
