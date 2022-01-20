@@ -1,5 +1,5 @@
 from frontend.api.individuals import IndividualsClient
-from frontend.api.places import PlacesClients
+from frontend.api.places import PlacesClient
 
 
 class Client:
@@ -8,4 +8,4 @@ class Client:
         url = f'{url}/api/v1'
 
         self.individuals = IndividualsClient(url)
-        self.places = PlacesClients(url)
+        self.places = PlacesClient(url)

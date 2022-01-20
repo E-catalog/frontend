@@ -1,8 +1,6 @@
-from http import HTTPStatus
-
 import httpx
 
-from frontend.api.models import Individual
+from frontend.api.schemas import Individual
 
 
 class IndividualsClient:
@@ -22,20 +20,16 @@ class IndividualsClient:
         data = response.json()
         return Individual(**data)
 
-    def add(self, payload: Individual) -> int:
+    def add(self, payload: Individual) -> None:
         new_individual = payload.dict()
         response = httpx.post(f'{self.url}/', json=new_individual)
         response.raise_for_status()
-        return HTTPStatus.CREATED
 
-    def update(self, uid: int, payload: Individual) -> int:
+    def update(self, uid: int, payload: Individual) -> None:
         updated_individual = payload.dict()
         response = httpx.put(f'{self.url}/{uid}', json=updated_individual)
         response.raise_for_status()
-        return HTTPStatus.OK
 
-    def delete(self, uid: int) -> int:
+    def delete(self, uid: int) -> None:
         response = httpx.delete(f'{self.url}/{uid}')
         response.raise_for_status()
-        return HTTPStatus.NO_CONTENT
-        
