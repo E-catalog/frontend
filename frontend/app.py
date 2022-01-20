@@ -18,7 +18,7 @@ def show_individuals():
     title = 'Электронный каталог хранения'
     individuals = client.individuals.get_all()
     return render_template(
-        'individuals.html',
+        'main_page.html',
         title=title,
         individuals=[item.dict() for item in individuals],
     )
@@ -32,7 +32,7 @@ def get_individual():
 
     id_from_form = form_data['id']
     individual = client.individuals.get(id_from_form)
-    return render_template('update_individual_form.html', individual=individual.dict())
+    return render_template('individuals/update_individual_form.html', individual=individual.dict())
 
 
 @app.route('/individuals/create/', methods=['POST'])
@@ -78,14 +78,6 @@ def delete_individual():
     return show_individuals()
 
 
-def show_places():
-    title = 'Электронный каталог хранения'
-    places = client.places.get_all()
-    return render_template(
-        'places.html',
-        title=title,
-        places=[item.dict() for item in places],
-    )
 
 
 @app.route('/places/get/', methods=['POST'])
@@ -95,8 +87,8 @@ def get_place():
         abort(HTTPStatus.BAD_REQUEST, 'Отсутствуют данные')
 
     id_from_form = form_data['id']
-    individual = client.individuals.get(id_from_form)
-    return render_template('update_individual_form.html', individual=individual.dict())
+    place = client.place.get(id_from_form)
+    return render_template('places/update_places_form.html', place=place.dict())
 
 
 
@@ -116,11 +108,11 @@ def update_place():
     return redirect(url_for('show_places'))
 
 
-    @app.route('/places/create/', methods=['POST'])
-    def add_place():
-        form_data: dict[str, Any] = request.form.to_dict()
-        if not form_data:
-            abort(HTTPStatus.BAD_REQUEST, 'Отсутствуют данные')
+@app.route('/places/create/', methods=['POST'])
+def add_place():
+    form_data: dict[str, Any] = request.form.to_dict()
+    if not form_data:
+        abort(HTTPStatus.BAD_REQUEST, 'Отсутствуют данные')
 
     form_data['uid'] = -1
 
@@ -130,8 +122,7 @@ def update_place():
         abort(HTTPStatus.BAD_REQUEST, 'Неверный тип данных в запросе')
 
     client.places.add(payload)
-    return redirect(url_for('show_places'))
-
+    return redirect(url_for('show_individuals'))
 
 @app.route('/places/delete/', methods=['POST'])
 def delete_place():
@@ -141,4 +132,5 @@ def delete_place():
 
     id_from_form = form_data['id']
     client.places.delete(id_from_form)
-    return show_individuals()
+    return redirect(url_for('show_places'))
+
