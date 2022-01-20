@@ -26,6 +26,19 @@ def render_main_page():
     )
 
 
+@app.route('/individuals')
+def render_individuals_page():
+    title = 'Электронный каталог хранения'
+    individuals = client.individuals.get_all()
+    places = client.places.get_all()
+    return render_template(
+        'individuals/all_individuals.html',
+        title=title,
+        individuals=[item.dict() for item in individuals],
+        places=[item.dict() for item in places],
+    )
+
+
 @app.route('/individuals/get/', methods=['POST'])
 def get_individual():
     form_data: dict[str, Any] = request.form.to_dict()
@@ -56,7 +69,7 @@ def add_individual():
         abort(HTTPStatus.BAD_REQUEST, 'Неверный тип данных в запросе')
 
     client.individuals.add(payload)
-    return redirect(url_for('render_main_page'))
+    return redirect(url_for('render_individuals_page'))
 
 
 @app.route('/individuals/update/', methods=['POST'])
@@ -71,7 +84,7 @@ def update_individual():
         abort(HTTPStatus.BAD_REQUEST, 'Неверный тип данных в запросе')
 
     client.individuals.update(uid=form_data['uid'], payload=payload)
-    return redirect(url_for('render_main_page'))
+    return redirect(url_for('render_individuals_page'))
 
 
 @app.route('/individuals/delete/', methods=['POST'])
@@ -82,7 +95,7 @@ def delete_individual():
 
     id_from_form = form_data['uid']
     client.individuals.delete(id_from_form)
-    return render_main_page()
+    return redirect(url_for('render_individuals_page'))
 
 
 @app.route('/places/add/', methods=['POST'])

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>Индивиды в хранении</h2>
+    <table class="table table-bordered table-hover table-sm">
+      <thead class="table-light">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Название</th>
+          <th scope="col">Место раскопок</th>
+          <th scope="col">Год раскопок</th>
+          <th scope="col">Тип индивида</th>
+          <th scope="col">Сохранность</th>
+          <th scope="col">Пол</th>
+          <th scope="col">Возраст</th>
+          <th scope="col">Датировка</th>
+          <th scope="col">Комментарии</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for individual in individuals %}
+          <tr>
+              <th scope="row">{{ individual.uid }}</th>
+              <td>{{ individual.name }}</td>
+              <td>{{ individual.links['place']['name'] }}</td>
+              <td>{{ individual.year_of_excavation }}</td>
+              <td>{{ individual.individual_type }}</td>
+              <td>{{ individual.preservation }}</td>
+              <td>{{ individual.sex }}</td>
+              <td>{{ individual.age }}</td>
+              <td>{{ individual.epoch }}</td>
+              <td>{{ individual.comments }}</td>
+          </tr>
+          {% endfor %}
+      </tbody>
+    </table>
+    <div class="row">
+        <div class="col-4">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddIndividualModal">Добавить индивид</button>
+            {% include 'individuals/add_individual.html' %}
+        </div>
+        <div class="col-4">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#GetIndividualModal">Изменить данные индивида</button>
+            {% include 'individuals/get_individual_modal.html' %}
+            {% include 'individuals/update_individual_modal.html' %}
+        </div>
+        <div class="col-4">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#DeleteIndividualModal">Удалить индивида</button>
+            {% include 'individuals/delete_individual_modal.html' %}
+        </div>
+    </div>
+</div>
+{% endblock %}
