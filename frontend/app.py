@@ -34,7 +34,12 @@ def get_individual():
 
     uid = form_data['uid']
     individual = client.individuals.get(uid)
-    return render_template('individuals/update_individual_form.html', individual=individual.dict())
+    places = client.places.get_all()
+    return render_template(
+        'individuals/update_individual_form.html',
+        individual=individual.dict(),
+        places=places,
+    )
 
 
 @app.route('/individuals/create/', methods=['POST'])

@@ -4,13 +4,15 @@
         <input class="form-control" name="uid" value="{{ individual.uid }}" readonly>
     </div>
     <div class="form-group">
-        <label>ID места</label>
-        <input class="form-control" name="place_uid" value="{{ individual.place_uid }}" readonly>
-    </div>
-    <div class="form-group">
         <label>Место раскопок</label>
-        <input class="form-control" name="place" value="{{ individual.place }}">
-    </div>
+        <select class="form-select" name="place_uid" aria-label="Место">
+            <option value={{individual.links['place']['uid']}} selected>{{ individual.links['place']['name'] }}</option>
+            {% for place in places %}
+                {% if place.name != individual.links['place']['name'] %}
+                    <option value={{place.uid}}>{{ place.name }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>    </div>
     <div class="form-group">
         <label>Название</label>
         <input class="form-control" name="name" value="{{ individual.name }}">
@@ -21,11 +23,21 @@
     </div>
     <div class='form-group'>
         <label>Тип индивида</label>
-        <input class="form-control" name="individual_type" value="{{ individual.individual_type }}">
+        <select class="form-select" name="individual_type" aria-label="Тип индивида">
+            <option selected>{{ individual.individual_type }}</option>
+            <option value="Не определен">Не определен</option>
+            <option value="Ингумация">Ингумация</option>
+            <option value="Кремация">Кремация</option>
+        </select>
     </div>
     <div class='form-group'>
         <label>Пол</label>
-        <input class="form-control" name="sex" value="{{ individual.sex }}">
+        <select class="form-select" name="sex" aria-label="Пол">
+            <option selected>{{ individual.sex }}</option>
+            <option value="Не определен">Не определен</option>
+            <option value="Мужчина">Мужчина</option>
+            <option value="Женщина">Женщина</option>
+        </select>
     </div>
     <div class='form-group'>
         <label>Возраст</label>
@@ -33,11 +45,33 @@
     </div>
     <div class='form-group'>
         <label>Сохранность</label>
-        <input class="form-control" name="preservation" value="{{ individual.preservation }}">
+        <select class="form-select" name="preservation" aria-label="Сохранность">
+            <option selected>{{ individual.preservation }}</option>
+            <option value="Хорошая">Хорошая</option>
+            <option value="Средняя">Средняя</option>
+            <option value="Плохая">Плохая</option>
+            <option value="Очень плохая">Очень плохая</option>
+        </select>
     </div>
     <div class='form-group'>
-        <label>Датировка</label>
-        <input class="form-control" name="epoch" value="{{ individual.epoch }}">
+        <label>Эпоха</label>
+        <select class="form-select" name="epoch" aria-label="Эпоха">
+            <option selected>{{individual.epoch}}</option>
+            <option value="Новое и новейшее время">Новое и новейшее время</option>
+            <option value="Позднее средневековье">Позднее средневековье</option>
+            <option value="Средневековье">Средневековье</option>
+            <option value="Раннее средневековье">Раннее средневековье</option>
+            <option value="Эпоха великого переселения">Эпоха великого переселения</option>
+            <option value="Античное время">Античное время</option>
+            <option value="Ранний железный век">Ранний железный век</option>
+            <option value="Поздний бронзовый век">Поздний бронзовый век</option>
+            <option value="Бронзовый век">Бронзовый век</option>
+            <option value="Ранний бронзовый век">Ранний бронзовый век</option>
+            <option value="Энеолит">Энеолит</option>
+            <option value="Неолит">Неолит</option>
+            <option value="Мезолит">Мезолит</option>
+            <option value="Палеолит">Палеолит</option>
+        </select>
     </div>
     <div class='form-group'>
         <label>Комментарии</label>
