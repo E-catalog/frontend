@@ -81,7 +81,15 @@
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddPlaceModal">Добавить место</button>
             {% include 'places/add_place.html' %}
         </div>
-
+        <div class="col-4">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#GetPlaceModal">Изменить данные о месте</button>
+            {% include 'places/get_place_modal.html' %}
+            {% include 'places/update_place_modal.html' %}
+        </div>
+        <div class="col-4">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#DeletePlaceModal">Удалить место</button>
+            {% include 'places/delete_place_modal.html' %}
+        </div>
     </div>
 </div>
 {% endblock %}
