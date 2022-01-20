@@ -21,8 +21,8 @@ class PlacesClient:
         return Place(**data)
 
     def add(self, payload: Place) -> None:
-        new_individual = payload.dict()
-        response = httpx.post(f'{self.url}/', json=new_individual)
+        new_place = payload.dict()
+        response = httpx.post(f'{self.url}/', json=new_place)
         response.raise_for_status()
 
     def update(self, uid: int, payload: Place) -> None:

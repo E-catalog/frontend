@@ -82,10 +82,10 @@ def delete_individual():
 
     id_from_form = form_data['uid']
     client.individuals.delete(id_from_form)
-    return render_main_page()
+    return redirect(url_for('render_main_page'))
+  
 
-
-@app.route('/places/add/', methods=['POST'])
+@app.route('/places/create/', methods=['POST'])
 def add_place():
     form_data: dict[str, Any] = request.form.to_dict()
     if not form_data:
@@ -99,4 +99,42 @@ def add_place():
         abort(HTTPStatus.BAD_REQUEST, 'Неверный тип данных в запросе')
 
     client.places.add(payload)
+    return redirect(url_for('render_main_page'))
+
+  
+@app.route('/places/get/', methods=['POST'])
+def get_place():
+    form_data: dict[str, Any] = request.form.to_dict()
+    if not form_data:
+        abort(HTTPStatus.BAD_REQUEST, 'Отсутствуют данные')
+
+    id_from_form = form_data['id']
+    place = client.place.get(id_from_form)
+    return render_template('places/update_places_form.html', place=place.dict())
+
+
+@app.route('/places/update/', methods=['POST'])
+def update_place():
+    form_data: dict[str, Any] = request.form.to_dict()
+
+    if not form_data:
+        abort(HTTPStatus.BAD_REQUEST, 'Отсутствуют данные')
+
+    try:
+        payload = Place(**form_data)
+    except ValidationError:
+        abort(HTTPStatus.BAD_REQUEST, 'Неверный тип данных в запросе')
+
+    client.places.update(uid=form_data['uid'], payload=payload)
+    return redirect(url_for('render_main_page'))
+
+
+@app.route('/places/delete/', methods=['POST'])
+def delete_place():
+    form_data: dict[str, Any] = request.form.to_dict()
+    if not form_data:
+        abort(HTTPStatus.BAD_REQUEST, 'Отсутствуют данные')
+
+    id_from_form = form_data['id']
+    client.places.delete(id_from_form)
     return redirect(url_for('render_main_page'))
