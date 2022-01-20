@@ -8,7 +8,9 @@
         <select class="form-select" name="place_uid" aria-label="Место">
             <option value={{individual.links['place']['uid']}} selected>{{ individual.links['place']['name'] }}</option>
             {% for place in places %}
-            <option value={{place.uid}}>{{ place.name }}</option>
+                {% if place.name != individual.links['place']['name'] %}
+                    <option value={{place.uid}}>{{ place.name }}</option>
+                {% endif %}
             {% endfor %}
         </select>    </div>
     <div class="form-group">

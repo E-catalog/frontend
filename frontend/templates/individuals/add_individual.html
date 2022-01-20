@@ -9,7 +9,7 @@
                 <div class="form-group">
                     <label>Место раскопок</label>
                     <select class="form-select" name="place_uid" aria-label="Место">
-                        <option selected>Не определен</option>
+                        <option selected></option>
                         {% for place in places %}
                         <option value={{place.uid}}>{{ place.name }}</option>
                         {% endfor %}
