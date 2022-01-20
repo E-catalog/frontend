@@ -5,7 +5,6 @@ from frontend.api.schemas import Place
 
 class PlacesClient:
 
-
     def __init__(self, url: str) -> None:
         self.url = f'{url}/places'
 
@@ -22,7 +21,7 @@ class PlacesClient:
         return Place(**data)
 
     def add(self, payload: Place) -> None:
-        new_individual = payload.dict()
+        new_place = payload.dict()
         response = httpx.post(f'{self.url}/', json=new_place)
         response.raise_for_status()
 
