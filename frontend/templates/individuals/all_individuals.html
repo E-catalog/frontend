@@ -36,16 +36,16 @@
       </tbody>
     </table>
     <div class="row">
-        <div class="col-4">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddIndividualModal">Добавить индивид</button>
+        <div class="col-4" align="center">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddIndividualModal">Добавить индивида</button>
             {% include 'individuals/add_individual.html' %}
         </div>
-        <div class="col-4">
+        <div class="col-4" align="center">
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#GetIndividualModal">Изменить данные индивида</button>
             {% include 'individuals/get_individual_modal.html' %}
             {% include 'individuals/update_individual_modal.html' %}
         </div>
-        <div class="col-4">
+        <div class="col-4" align="center">
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#DeleteIndividualModal">Удалить индивида</button>
             {% include 'individuals/delete_individual_modal.html' %}
         </div>
