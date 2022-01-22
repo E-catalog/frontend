@@ -128,7 +128,7 @@ def get_place():
 
     id_from_form = form_data['id']
     place = client.places.get(id_from_form)
-    return render_template('places/update_places_form.html', place=place.dict())
+    return render_template('places/update_place_form.html', place=place.dict())
 
 
 @app.route('/places/update/', methods=['POST'])
