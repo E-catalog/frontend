@@ -15,12 +15,10 @@ client = Client(config.api_url)
 
 @app.route('/')
 def render_main_page():
-    title = 'Электронный каталог хранения'
     individuals = client.individuals.get_all()
     places = client.places.get_all()
     return render_template(
         'main_page.html',
-        title=title,
         individuals=[item.dict() for item in individuals],
         places=[item.dict() for item in places],
     )
@@ -28,12 +26,10 @@ def render_main_page():
 
 @app.route('/individuals')
 def render_individuals_page():
-    title = 'Электронный каталог хранения'
     individuals = client.individuals.get_all()
     places = client.places.get_all()
     return render_template(
         'individuals/all_individuals.html',
-        title=title,
         individuals=[item.dict() for item in individuals],
         places=[item.dict() for item in places],
     )
@@ -41,11 +37,9 @@ def render_individuals_page():
 
 @app.route('/places')
 def render_places_page():
-    title = 'Электронный каталог хранения'
     places = client.places.get_all()
     return render_template(
         'places/all_places.html',
-        title=title,
         places=[item.dict() for item in places],
     )
 
