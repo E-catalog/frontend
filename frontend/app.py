@@ -15,13 +15,7 @@ client = Client(config.api_url)
 
 @app.route('/')
 def render_main_page():
-    individuals = client.individuals.get_all()
-    places = client.places.get_all()
-    return render_template(
-        'main_page.html',
-        individuals=[item.dict() for item in individuals],
-        places=[item.dict() for item in places],
-    )
+    return render_template('main_page.html')
 
 
 @app.route('/individuals')

@@ -1,7 +1,7 @@
 {
   "files.exclude": {
       "**/__pycache__": true,
-      ".env": true,
+      ".env": false,
       ".venv": true,
       "env/": true,
       "venv/": true,
