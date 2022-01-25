@@ -5,23 +5,28 @@
     </div>
     <div class="form-group">
         <label>Название</label>
-        <input class="form-control" name="name" placeholder="Погребение 1">
+        <input class="form-control" name="name" value="{{ place.name }}">
     </div>
     <div class='form-group'>
-        <label>Глава экспедиции</label>
-        <input class="form-control" name="head_of_excavations" placeholder="2017">
+        <label>Автор раскопок</label>
+        <input class="form-control" name="head_of_excavations" value="{{ place.head_of_excavations }}">
     </div>
     <div class='form-group'>
-        <label>Тип захоронения</label>
-        <input class="form-control" name="type_of_burial_site" placeholder="Прекрасный">
+        <label>Тип могильника</label>
+        <select class="form-select" name="type_of_burial_site" aria-label="Тип могильника">
+            <option selected>{{ place.type_of_burial_site }}</option>
+            <option value="Курганный">Курганный</option>
+            <option value="Грунтовый">Грунтовый</option>
+            <option value="Поселенческий">Поселенческий</option>
+        </select>
     </div>
     <div class='form-group'>
         <label>Координаты</label>
-        <input class="form-control" name="coordinates" placeholder="8888.2222.2333">
+        <input class="form-control" name="coordinates" value="{{ place.coordinates }}">
     </div>
     <div class='form-group'>
         <label>Комментарии</label>
-        <input class="form-control" name="comments" placeholder="Массивный скелет, охра на черепе">
+        <input class="form-control" name="comments" value="{{ place.comments }}">
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>

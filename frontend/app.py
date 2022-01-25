@@ -15,13 +15,7 @@ client = Client(config.api_url)
 
 @app.route('/')
 def render_main_page():
-    individuals = client.individuals.get_all()
-    places = client.places.get_all()
-    return render_template(
-        'main_page.html',
-        individuals=[item.dict() for item in individuals],
-        places=[item.dict() for item in places],
-    )
+    return render_template('main_page.html')
 
 
 @app.route('/individuals')
@@ -98,8 +92,8 @@ def delete_individual():
     if not form_data:
         abort(HTTPStatus.BAD_REQUEST, 'Отсутствуют данные')
 
-    id_from_form = form_data['uid']
-    client.individuals.delete(id_from_form)
+    uid = form_data['uid']
+    client.individuals.delete(uid)
     return redirect(url_for('render_individuals_page'))
 
 
@@ -126,8 +120,8 @@ def get_place():
     if not form_data:
         abort(HTTPStatus.BAD_REQUEST, 'Отсутствуют данные')
 
-    id_from_form = form_data['id']
-    place = client.places.get(id_from_form)
+    uid = form_data['uid']
+    place = client.places.get(uid)
     return render_template('places/update_place_form.html', place=place.dict())
 
 
@@ -153,6 +147,6 @@ def delete_place():
     if not form_data:
         abort(HTTPStatus.BAD_REQUEST, 'Отсутствуют данные')
 
-    id_from_form = form_data['id']
-    client.places.delete(id_from_form)
+    uid = form_data['uid']
+    client.places.delete(uid)
     return redirect(url_for('render_places_page'))
