@@ -1,4 +1,4 @@
-if (document.URL == 'http://192.168.1.64:5001/individuals')
+if (document.location.pathname == '/individuals')
     document.forms['get-individual'].addEventListener('submit', (event) => {
         event.preventDefault();
         fetch(event.target.action, {
@@ -19,7 +19,7 @@ if (document.URL == 'http://192.168.1.64:5001/individuals')
     });
 
 
-if (document.URL == 'http://192.168.1.64:5001/places')
+if (document.location.pathname == '/places')
     document.forms['get-place'].addEventListener('submit', (event) => {
         event.preventDefault();
         fetch(event.target.action, {
