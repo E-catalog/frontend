@@ -5,7 +5,7 @@
           <h5 class="modal-title" id="exampleModalLabel">Добавить новое место</h5>
         </div>
         <div class="modal-body">
-            <form action="{{ url_for('add_place') }}" method="POST">
+            <form action="{{ url_for('places.add_place') }}" method="POST">
                 <div class="form-group">
                     <label>Название</label>
                     <input class="form-control" name="name" placeholder="Кремлевский курган">

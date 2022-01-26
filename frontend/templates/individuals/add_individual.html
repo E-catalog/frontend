@@ -5,7 +5,7 @@
           <h5 class="modal-title" id="exampleModalLabel">Добавить нового индивида</h5>
         </div>
         <div class="modal-body">
-            <form action="{{ url_for('add_individual') }}" method="POST">
+            <form action="{{ url_for('individuals.add_individual') }}" method="POST">
                 <div class="form-group">
                     <label>Место раскопок</label>
                     <select class="form-select" name="place_uid" aria-label="Место">

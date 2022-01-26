@@ -1,4 +1,4 @@
-<form action="{{ url_for('update_individual') }}" method="POST">
+<form action="{{ url_for('individuals.update_individual') }}" method="POST">
     <div class="form-group">
         <label>ID</label>
         <input class="form-control" name="uid" value="{{ individual.uid }}" readonly>
@@ -12,7 +12,8 @@
                     <option value={{place.uid}}>{{ place.name }}</option>
                 {% endif %}
             {% endfor %}
-        </select>    </div>
+        </select>
+    </div>
     <div class="form-group">
         <label>Название</label>
         <input class="form-control" name="name" value="{{ individual.name }}">

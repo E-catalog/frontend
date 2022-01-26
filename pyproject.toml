@@ -11,6 +11,7 @@ SQLAlchemy = "^1.4.29"
 requests = "^2.26.0"
 httpx = "^0.21.3"
 pydantic = "^1.9.0"
+gunicorn = "^20.1.0"
 
 [tool.poetry.dev-dependencies]
 wemake-python-styleguide = "^0.16.0"

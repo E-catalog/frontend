@@ -9,4 +9,4 @@ RUN poetry install --no-dev
 
 COPY frontend /app/frontend
 
-CMD ["poetry", "run", "python", "-m", "frontend"]
+CMD [ "gunicorn", "-w", "4", "-b", "0.0.0.0:5001", "frontend.app:app"]
