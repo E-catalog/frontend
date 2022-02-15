@@ -70,7 +70,7 @@ To run any file or package inside the Poetry environment use `poetry run <name_o
 To run the project in the terminal use
 
 ```bash, PowerShell, CMD
-    poetry run python -m backend
+    poetry run python -m frontend
 ```
 
 Or you can use 'Run and Debug' if you're using VS Code - the necessary *launch.json* file are already there. Use 'frontend' to run the app.
